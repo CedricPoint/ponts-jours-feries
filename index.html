@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ponts 2027 : jours fériés et où poser ses congés (calculateur gratuit)</title>
+<meta name="description" content="Ponts 2027 : la liste des jours fériés en France et le calculateur qui te dit exactement quels jours de congés poser pour maximiser tes vacances. Alsace-Moselle incluse, export agenda.">
+<link rel="canonical" href="https://cedricpoint.github.io/ponts-jours-feries/">
+<meta name="theme-color" content="#fff7ec">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Ponts 2027 : où poser tes congés pour avoir le max de vacances 🏖️">
+<meta property="og:description" content="Jours fériés 2027, ponts, et calculateur qui optimise tes congés. Gratuit, sans inscription.">
+<meta property="og:image" content="https://cedricpoint.github.io/ponts-jours-feries/og.png">
+<meta property="og:url" content="https://cedricpoint.github.io/ponts-jours-feries/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏖️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Quels sont les jours fériés en 2027 ?",
+     "acceptedAnswer": {"@type": "Answer", "text": "En 2027, la France compte 11 jours fériés : Jour de l'an (vendredi 1er janvier), Lundi de Pâques (29 mars), Fête du Travail (samedi 1er mai), Victoire 1945 (samedi 8 mai), Ascension (jeudi 6 mai), Lundi de Pentecôte (17 mai), Fête nationale (mercredi 14 juillet), Assomption (dimanche 15 août), Toussaint (lundi 1er novembre), Armistice (jeudi 11 novembre) et Noël (samedi 25 décembre). L'Alsace-Moselle ajoute le Vendredi saint (26 mars) et la Saint-Étienne (dimanche 26 décembre)."}},
+    {"@type": "Question", "name": "Quels sont les ponts en 2027 ?",
+     "acceptedAnswer": {"@type": "Answer", "text": "En 2027, il y a deux vrais ponts : l'Ascension (jeudi 6 mai) avec le vendredi 7 mai à poser, et l'Armistice (jeudi 11 novembre) avec le vendredi 12 novembre à poser. Chacun donne 4 jours de repos pour 1 seul jour de congé. Le 14 juillet tombe un mercredi : en posant le lundi 12 et le mardi 13, ou le jeudi 15 et le vendredi 16, on obtient 5 jours."}},
+    {"@type": "Question", "name": "2027 est-elle une bonne année pour les jours fériés ?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Non : en 2027, quatre jours fériés tombent un week-end (1er mai, 8 mai, 15 août et 25 décembre), ce qui en fait une année peu généreuse. Il ne reste que 7 jours fériés en semaine en France métropolitaine."}},
+    {"@type": "Question", "name": "Comment poser ses congés intelligemment ?",
+     "acceptedAnswer": {"@type": "Answer", "text": "L'idée est de coller ses jours de congés aux week-ends et aux jours fériés pour créer de longues coupures. Le calculateur de cette page teste toutes les combinaisons possibles et indique les jours exacts à poser pour obtenir le maximum de jours de repos avec ton nombre de congés."}}
+  ]
+}
+</script>
+<style>
+:root{
+  --bg:#fff7ec; --card:#ffffff; --ink:#1f2a37; --mute:#5f6b7a; --line:#eadfce;
+  --sea:#0f8b8d; --sea-s:#d4f0ee; --sun:#ffb000; --sun-s:#fff0c7; --coral:#f2545b; --coral-s:#fde0e1; --we:#f1ebe2;
+  --shadow:0 1px 2px rgba(31,42,55,.06),0 8px 24px rgba(31,42,55,.06);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#13171d; --card:#1b2129; --ink:#eef2f6; --mute:#9aa6b5; --line:#2b333e;
+  --sea:#3cc6c3; --sea-s:#163b3d; --sun:#ffc23d; --sun-s:#3d3216; --coral:#ff7a7f; --coral-s:#47232a; --we:#232a33;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html,body{background:var(--bg);color:var(--ink)}
+body{font-family:"DM Sans",system-ui,sans-serif;line-height:1.5}
+main{max-width:980px;margin:0 auto;padding:28px 16px 40px}
+h1,h2,.serif{font-family:"DM Serif Display",Georgia,serif;font-weight:400;letter-spacing:-.01em}
+h1{font-size:clamp(36px,7vw,62px);line-height:1.04}
+h1 em{font-style:normal;color:var(--sea)}
+h2{font-size:clamp(26px,4.4vw,34px);line-height:1.15;margin-bottom:14px}
+.lead{font-size:18px;color:var(--mute);max-width:60ch;margin-top:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow)}
+section{margin-top:28px}
+
+/* Réglages */
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:18px;margin-top:24px}
+.ctl label,.ctl .lbl{display:block;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin-bottom:8px}
+select{width:100%;font:600 17px "DM Sans";color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:11px 12px}
+.range-row{display:flex;align-items:center;gap:12px}
+input[type=range]{flex:1;accent-color:var(--sea);height:28px}
+.bubble{font:800 22px "DM Sans";min-width:2.4ch;text-align:right;color:var(--sea)}
+.days{display:flex;gap:6px}
+.days button{flex:1;min-width:0;aspect-ratio:1;max-width:44px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--mute);
+  font:800 14px "DM Sans";cursor:pointer}
+.days button.on{background:var(--sea);border-color:var(--sea);color:#fff}
+.check{display:flex;gap:8px;align-items:flex-start;font-size:14px;color:var(--mute);margin-top:10px;cursor:pointer}
+.check input{accent-color:var(--sea);margin-top:3px}
+
+/* Résultat principal */
+.hero-res{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;margin-top:18px;background:linear-gradient(135deg,var(--sea),#0b6f86);color:#fff;border:0}
+.hero-res .big{font:400 clamp(64px,13vw,110px)/.9 "DM Serif Display"}
+.hero-res .big small{font-size:.32em;display:block;font-family:"DM Sans";font-weight:800;letter-spacing:.04em;text-transform:uppercase;opacity:.85;margin-top:6px}
+.hero-res p{font-size:19px;line-height:1.45}
+.hero-res b{color:#ffe08a}
+.mult{display:inline-block;background:rgba(255,255,255,.18);border-radius:99px;padding:4px 12px;font-weight:800;margin-top:10px}
+@media (max-width:520px){.hero-res{grid-template-columns:1fr;text-align:center}}
+
+/* Coupures */
+.breaks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(270px,100%),1fr));gap:12px}
+.brk{position:relative;padding:16px 16px 14px;border-radius:16px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}
+.brk .when{font-weight:800;font-size:17px;padding-right:118px}
+.brk .pose{color:var(--mute);font-size:14px;margin-top:4px}
+.brk .pose b{color:var(--ink)}
+.brk .tag{position:absolute;top:14px;right:14px;font:800 13px "DM Sans";padding:4px 10px;border-radius:99px;background:var(--sun-s);color:var(--ink)}
+.brk .bar{display:flex;gap:3px;margin-top:12px;flex-wrap:wrap}
+.brk .bar i{width:14px;height:14px;border-radius:4px;background:var(--we)}
+.brk .bar i.h{background:var(--coral)}
+.brk .bar i.c{background:var(--sun)}
+.left{margin-top:10px;color:var(--mute);font-size:15px}
+
+/* Calendrier */
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:var(--mute);margin-bottom:14px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:6px}
+.months{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(210px,100%),1fr));gap:18px}
+.month h3{font:800 15px "DM Sans";text-transform:capitalize;margin-bottom:6px}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.grid span{aspect-ratio:1;display:grid;place-items:center;font-size:12px;border-radius:6px;font-variant-numeric:tabular-nums}
+.grid .dow{font-weight:800;color:var(--mute);font-size:11px;aspect-ratio:auto;padding-bottom:2px}
+.grid .we{background:var(--we);color:var(--mute)}
+.grid .h{background:var(--coral);color:#fff;font-weight:800}
+.grid .c{background:var(--sun);color:#1f2a37;font-weight:800}
+.grid .r{box-shadow:inset 0 0 0 2px var(--sea)}
+.grid .today{outline:2px solid var(--ink);outline-offset:-2px}
+
+/* Tableau fériés */
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{text-align:left;padding:11px 8px;border-bottom:1px solid var(--line)}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute)}
+td.d{font-weight:800;white-space:nowrap}
+.badge{display:inline-block;font-size:12px;font-weight:800;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.b-pont{background:var(--sun-s)}.b-we{background:var(--coral-s)}.b-ok{background:var(--sea-s)}
+.verdict{margin-top:14px;font-size:17px}
+
+/* Partage */
+.share-grid{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:20px;align-items:center}
+@media (max-width:680px){.share-grid{grid-template-columns:1fr}}
+.preview{width:100%;border-radius:16px;box-shadow:var(--shadow);display:block}
+.btn{appearance:none;border:0;cursor:pointer;font:800 17px "DM Sans";padding:15px 20px;border-radius:14px;background:var(--sea);color:#fff;
+  display:flex;gap:8px;align-items:center;justify-content:center;width:100%;text-decoration:none}
+.btn.alt{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.btns{display:grid;gap:10px}
+.btn-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.btn-row .btn{font-size:14px;padding:12px 6px}
+
+/* FAQ */
+details{border-bottom:1px solid var(--line);padding:14px 0}
+summary{font-weight:800;font-size:17px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";color:var(--sea);font-size:22px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--mute);margin-top:8px}
+footer{text-align:center;color:var(--mute);font-size:13px;padding:10px 16px 40px}
+footer a{color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:var(--ink);color:var(--bg);font-weight:800;padding:12px 18px;border-radius:12px;transition:transform .3s;z-index:9}
+.toast.on{transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Ponts <span id="yTitle">2027</span> : pose tes congés <em>au bon moment</em></h1>
+    <p class="lead">Les jours fériés, les ponts, et surtout <strong>les jours exacts à poser</strong> pour transformer quelques jours de congés en un maximum de vacances. Le calcul teste toutes les combinaisons possibles.</p>
+  </header>
+
+  <div class="card controls" role="group" aria-label="Réglages">
+    <div class="ctl">
+      <label for="year">Année</label>
+      <select id="year"></select>
+    </div>
+    <div class="ctl">
+      <label for="budget">Jours de congés à poser</label>
+      <div class="range-row"><input type="range" id="budget" min="1" max="30" value="10"><span class="bubble" id="budgetV">10</span></div>
+    </div>
+    <div class="ctl">
+      <label for="minLen">Type de coupures</label>
+      <select id="minLen">
+        <option value="4">Ponts &amp; week-ends prolongés (4 j et +)</option>
+        <option value="6">Petites escapades (6 j et +)</option>
+        <option value="9">Vraies vacances (9 j et +)</option>
+        <option value="16">Grandes vacances (16 j et +)</option>
+      </select>
+    </div>
+    <div class="ctl">
+      <label for="zone">Zone</label>
+      <select id="zone">
+        <option value="fr">France (hors Alsace-Moselle)</option>
+        <option value="am">Alsace-Moselle</option>
+      </select>
+      <label class="check"><input type="checkbox" id="solid"> Je travaille le lundi de Pentecôte (journée de solidarité)</label>
+    </div>
+    <div class="ctl">
+      <span class="lbl">Jours travaillés</span>
+      <div class="days" id="days"></div>
+    </div>
+  </div>
+
+  <div class="card hero-res" aria-live="polite">
+    <div class="big"><span id="total">–</span><small>jours de repos</small></div>
+    <div>
+      <p id="summary"></p>
+      <span class="mult" id="mult"></span>
+    </div>
+  </div>
+
+  <section>
+    <h2>Les jours à poser</h2>
+    <div class="breaks" id="breaks"></div>
+    <p class="left" id="left"></p>
+  </section>
+
+  <section class="card">
+    <h2>Calendrier <span id="yCal"></span></h2>
+    <div class="legend">
+      <span><i style="background:var(--coral)"></i>Jour férié</span>
+      <span><i style="background:var(--sun)"></i>Congé à poser</span>
+      <span><i style="background:var(--we)"></i>Repos habituel</span>
+      <span><i style="box-shadow:inset 0 0 0 2px var(--sea)"></i>Période de vacances</span>
+    </div>
+    <div class="months" id="months"></div>
+  </section>
+
+  <section class="card">
+    <h2>Jours fériés <span id="yTable"></span></h2>
+    <div style="overflow-x:auto"><table>
+      <thead><tr><th>Date</th><th>Jour férié</th><th></th></tr></thead>
+      <tbody id="hol"></tbody>
+    </table></div>
+    <p class="verdict" id="verdict"></p>
+  </section>
+
+  <section class="card">
+    <h2>Partage tes vacances</h2>
+    <div class="share-grid">
+      <img class="preview" id="card" alt="Image de résumé à partager">
+      <div class="btns">
+        <button class="btn" id="shareBtn">📲 Partager</button>
+        <div class="btn-row">
+          <a class="btn alt" id="sWa" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <a class="btn alt" id="sFb" target="_blank" rel="noopener">📘 Facebook</a>
+          <button class="btn alt" id="sDl">🖼️ Image</button>
+        </div>
+        <button class="btn alt" id="ics">📅 Ajouter à mon agenda (.ics)</button>
+        <button class="btn alt" id="copy">🔗 Copier le lien de mon planning</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Questions fréquentes</h2>
+    <details open><summary>Quels sont les jours fériés en 2027 ?</summary>
+      <p>La France compte 11 jours fériés en 2027 : Jour de l'an (vendredi 1er janvier), Lundi de Pâques (29 mars), Fête du Travail (samedi 1er mai), Ascension (jeudi 6 mai), Victoire 1945 (samedi 8 mai), Lundi de Pentecôte (17 mai), Fête nationale (mercredi 14 juillet), Assomption (dimanche 15 août), Toussaint (lundi 1er novembre), Armistice (jeudi 11 novembre) et Noël (samedi 25 décembre). En Alsace-Moselle s'ajoutent le Vendredi saint (26 mars) et la Saint-Étienne (dimanche 26 décembre).</p></details>
+    <details><summary>Quels sont les ponts en 2027 ?</summary>
+      <p>Deux vrais ponts : l'Ascension (jeudi 6 mai, on pose le vendredi 7) et l'Armistice (jeudi 11 novembre, on pose le vendredi 12). Chacun offre 4 jours de repos pour un seul jour de congé. Le 14 juillet tombe un mercredi : deux jours posés suffisent pour 5 jours d'affilée.</p></details>
+    <details><summary>2027 est-elle une bonne année pour les jours fériés ?</summary>
+      <p>Pas vraiment : quatre jours fériés tombent un week-end (1er mai, 8 mai, 15 août et 25 décembre). Il ne reste que 7 jours fériés en semaine. Raison de plus pour bien placer ses congés !</p></details>
+    <details><summary>Comment fonctionne le calculateur ?</summary>
+      <p>Il repère tes jours de repos habituels et les jours fériés, puis teste toutes les façons de placer tes jours de congés pour créer les coupures les plus longues possibles. Tu peux changer l'année, le nombre de jours, la zone et tes jours travaillés (utile si tu travailles le samedi ou à temps partiel).</p></details>
+    <details><summary>Le lundi de Pentecôte est-il férié ?</summary>
+      <p>Oui, mais c'est aussi la journée de solidarité : selon ton entreprise, il peut être travaillé. Coche la case correspondante dans les réglages pour qu'il soit compté comme un jour travaillé.</p></details>
+    <details><summary>Mes données sont-elles enregistrées ?</summary>
+      <p>Non. Tout est calculé dans ton navigateur, rien n'est envoyé. Le lien de partage contient seulement tes réglages (année, nombre de jours, zone).</p></details>
+  </section>
+</main>
+<footer>
+  Calcul fait dans ton navigateur · Vérifie toujours avec ton employeur et ta convention collective ·
+  <a href="https://github.com/CedricPoint/ponts-jours-feries" target="_blank" rel="noopener">Code source</a>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const BASE = location.origin + location.pathname;
+const SITE = location.protocol.startsWith('http') ? BASE.replace(/^https?:\/\//, '').replace(/index\.html$/, '') : 'cedricpoint.github.io/ponts-jours-feries';
+const DAY = 864e5;
+const THIS_YEAR = new Date().getFullYear();
+
+/* ---------- Dates (en UTC pour éviter les pièges de l'heure d'été) ---------- */
+const D = (y, m, d) => Date.UTC(y, m - 1, d);
+const fmtLong = new Intl.DateTimeFormat('fr-FR', {weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC'});
+const fmtShort = new Intl.DateTimeFormat('fr-FR', {weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC'});
+const fmtMonth = new Intl.DateTimeFormat('fr-FR', {month: 'long', timeZone: 'UTC'});
+const short = t => fmtShort.format(t).replace(/\./g, '');
+
+function easter(y){ // algorithme de Meeus/Jones/Butcher (calendrier grégorien)
+  const a = y % 19, b = Math.floor(y / 100), c = y % 100, d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30, i = Math.floor(c / 4), k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7, m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31), day = ((h + l - 7 * m + 114) % 31) + 1;
+  return D(y, month, day);
+}
+
+function holidays(y, zone, solidarity){
+  const e = easter(y);
+  const list = [
+    [D(y, 1, 1), "Jour de l'an"],
+    [e + DAY, 'Lundi de Pâques'],
+    [D(y, 5, 1), 'Fête du Travail'],
+    [D(y, 5, 8), 'Victoire 1945'],
+    [e + 39 * DAY, 'Ascension'],
+    [e + 50 * DAY, 'Lundi de Pentecôte', solidarity],
+    [D(y, 7, 14), 'Fête nationale'],
+    [D(y, 8, 15), 'Assomption'],
+    [D(y, 11, 1), 'Toussaint'],
+    [D(y, 11, 11), 'Armistice 1918'],
+    [D(y, 12, 25), 'Noël'],
+  ];
+  if (zone === 'am') list.push([e - 2 * DAY, 'Vendredi saint'], [D(y, 12, 26), 'Saint-Étienne']);
+  return list.map(([t, name, worked]) => ({t, name, worked: !!worked})).sort((a, b) => a.t - b.t);
+}
+
+/* ---------- Optimisation ----------
+   Une "coupure" = suite de jours non travaillés (repos, fériés, congés posés) bordée par des jours travaillés.
+   On cherche l'ensemble de coupures qui maximise le total de jours de repos, avec au plus B congés.
+   Programmation dynamique sur les jours (intervalles pondérés + budget). */
+function optimize(y, B, workdays, hol, minLen = 1){
+  const start = D(y, 1, 1), n = Math.round((D(y + 1, 1, 1) - start) / DAY);
+  const holSet = new Set(hol.filter(h => !h.worked).map(h => Math.round((h.t - start) / DAY)));
+  const work = Array.from({length: n}, (_, i) => {
+    const dow = (new Date(start + i * DAY).getUTCDay() + 6) % 7; // 0 = lundi
+    return workdays.has(dow) && !holSet.has(i);
+  });
+  // valeur = jours de repos * 1000 - congés utilisés (à égalité, on préfère dépenser moins)
+  const NEG = -1e15;
+  const f = Array.from({length: n + 2}, () => new Float64Array(B + 1).fill(NEG));
+  const par = Array.from({length: n + 2}, () => new Array(B + 1).fill(null));
+  for (let b = 0; b <= B; b++) f[0][b] = 0;
+  const byStart = Array.from({length: n}, () => []);
+  for (let L = 0; L < n; L++) {
+    if (L > 0 && !work[L - 1]) continue;
+    let cost = 0;
+    for (let R = L; R < n; R++) {
+      if (work[R]) cost++;
+      if (cost > B) break;
+      if (cost >= 1 && R - L + 1 >= minLen && (R === n - 1 || work[R + 1])) byStart[L].push([R, cost]);
+    }
+  }
+  for (let d = 0; d <= n; d++) {
+    for (let b = 0; b <= B; b++) if (f[d][b] > f[d + 1][b]) { f[d + 1][b] = f[d][b]; par[d + 1][b] = null; }
+    if (d === n) break;
+    for (const [R, c] of byStart[d]) {
+      const t = Math.min(R + 2, n + 1), val = (R - d + 1) * 1000 - c;
+      for (let b = c; b <= B; b++) {
+        const cand = f[d][b - c] + val;
+        if (cand > f[t][b]) { f[t][b] = cand; par[t][b] = {L: d, R, c}; }
+      }
+    }
+  }
+  // reconstruction
+  const breaks = []; let d = n + 1, b = B;
+  while (d > 0) {
+    const p = par[d][b];
+    if (p) { breaks.push(p); b -= p.c; d = p.L; } else d--;
+  }
+  breaks.reverse();
+  const out = breaks.map(({L, R, c}) => {
+    const leave = []; for (let i = L; i <= R; i++) if (work[i]) leave.push(start + i * DAY);
+    return {from: start + L * DAY, to: start + R * DAY, len: R - L + 1, cost: c, leave};
+  });
+  return {breaks: out, work, start, n, holSet, used: out.reduce((a, x) => a + x.cost, 0)};
+}
+
+/* ---------- État ---------- */
+const DOW = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+const DOW_FULL = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+// à partir d'octobre, les gens préparent l'année suivante
+const state = {year: new Date().getMonth() >= 9 ? THIS_YEAR + 1 : THIS_YEAR, budget: 10, zone: 'fr', solid: false, minLen: 4, workdays: new Set([0, 1, 2, 3, 4])};
+
+(function readUrl(){
+  const q = new URLSearchParams(location.search);
+  const y = +q.get('an'); if (y >= 2000 && y <= 2100) state.year = y;
+  const j = +q.get('j'); if (j >= 1 && j <= 30) state.budget = j;
+  const m = +q.get('m'); if ([4, 6, 9, 16].includes(m)) state.minLen = m;
+  if (q.get('z') === 'am') state.zone = 'am';
+  if (q.get('s') === '1') state.solid = true;
+  const w = q.get('w'); if (w && /^[0-6]{1,7}$/.test(w)) state.workdays = new Set([...w].map(Number));
+})();
+function writeUrl(){
+  const q = new URLSearchParams({an: state.year, j: state.budget});
+  if (state.minLen !== 4) q.set('m', state.minLen);
+  if (state.zone === 'am') q.set('z', 'am');
+  if (state.solid) q.set('s', '1');
+  const w = [...state.workdays].sort().join(''); if (w !== '01234') q.set('w', w);
+  try { history.replaceState(null, '', BASE + '?' + q); } catch (_) {}
+  return BASE + '?' + q;
+}
+
+/* ---------- Réglages ---------- */
+for (let y = THIS_YEAR; y <= THIS_YEAR + 4; y++) $('year').add(new Option(y, y));
+if (![...$('year').options].some(o => +o.value === state.year)) $('year').add(new Option(state.year, state.year));
+$('year').value = state.year;
+$('budget').value = state.budget;
+$('zone').value = state.zone;
+$('minLen').value = state.minLen;
+$('minLen').onchange = () => { state.minLen = +$('minLen').value; render(); };
+$('solid').checked = state.solid;
+$('days').innerHTML = DOW.map((l, i) => `<button type="button" data-d="${i}" aria-pressed="false" aria-label="${DOW_FULL[i]}">${l}</button>`).join('');
+const syncDays = () => document.querySelectorAll('#days button').forEach(b => {
+  const on = state.workdays.has(+b.dataset.d); b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+});
+syncDays();
+$('days').onclick = e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const d = +b.dataset.d;
+  if (state.workdays.has(d)) { if (state.workdays.size > 1) state.workdays.delete(d); } else state.workdays.add(d);
+  syncDays(); render();
+};
+$('year').onchange = () => { state.year = +$('year').value; render(); };
+$('budget').oninput = () => { state.budget = +$('budget').value; $('budgetV').textContent = state.budget; render(); };
+$('zone').onchange = () => { state.zone = $('zone').value; render(); };
+$('solid').onchange = () => { state.solid = $('solid').checked; render(); };
+
+/* ---------- Rendu ---------- */
+let last = null;
+function render(){
+  const {year, budget, zone, solid, workdays, minLen} = state;
+  $('budgetV').textContent = budget;
+  ['yTitle', 'yCal', 'yTable'].forEach(id => $(id).textContent = year);
+  document.title = `Ponts ${year} : jours fériés et où poser ses congés (calculateur gratuit)`;
+  const hol = holidays(year, zone, solid);
+  const res = optimize(year, budget, workdays, hol, minLen);
+  const total = res.breaks.reduce((a, x) => a + x.len, 0);
+  last = {res, hol, total};
+
+  $('total').textContent = total;
+  $('summary').innerHTML = res.breaks.length
+    ? `En ${year}, en posant <b>${res.used} jour${res.used > 1 ? 's' : ''} de congé</b> aux bons endroits, tu profites de <b>${total} jours de repos</b>, répartis en ${res.breaks.length} période${res.breaks.length > 1 ? 's' : ''}.`
+    : `Aucune période trouvée avec ces réglages.`;
+  $('mult').textContent = res.used ? `×${(total / res.used).toLocaleString('fr-FR', {maximumFractionDigits: 1})} : chaque jour posé en vaut ${(total / res.used).toLocaleString('fr-FR', {maximumFractionDigits: 1})}` : '';
+
+  // coupures, triées par date
+  $('breaks').innerHTML = res.breaks.map(b => {
+    const cells = [];
+    for (let t = b.from; t <= b.to; t += DAY) {
+      const i = Math.round((t - res.start) / DAY);
+      cells.push(`<i class="${res.holSet.has(i) ? 'h' : res.work[i] ? 'c' : ''}"></i>`);
+    }
+    const eff = b.len / b.cost;
+    const tag = eff >= 3 ? '🔥 Super pont' : eff >= 2 ? '👍 Bon plan' : '🏖️ Vacances';
+    const leaveTxt = b.leave.length <= 3 ? b.leave.map(short).join(', ') : `du ${short(b.leave[0])} au ${short(b.leave[b.leave.length - 1])}`;
+    return `<div class="brk"><span class="tag">${tag}</span>
+      <div class="when">${b.len} jours · ${short(b.from)} → ${short(b.to)}</div>
+      <div class="pose">Poser <b>${b.cost} jour${b.cost > 1 ? 's' : ''}</b> : ${leaveTxt}</div>
+      <div class="bar" aria-hidden="true">${cells.join('')}</div></div>`;
+  }).join('');
+  $('left').textContent = res.used < budget
+    ? `Il te reste ${budget - res.used} jour${budget - res.used > 1 ? 's' : ''} : les placer n'ajouterait pas plus de repos qu'ils n'en coûtent, garde-les pour l'été !` : '';
+
+  renderCalendar(year, res);
+  renderTable(year, hol, workdays);
+  writeUrl();
+  scheduleCard();
+}
+
+function renderCalendar(year, res){
+  const leave = new Set(), inBreak = new Set();
+  res.breaks.forEach(b => { b.leave.forEach(t => leave.add(t)); for (let t = b.from; t <= b.to; t += DAY) inBreak.add(t); });
+  const now = new Date(), today = D(now.getFullYear(), now.getMonth() + 1, now.getDate());
+  let html = '';
+  for (let m = 1; m <= 12; m++) {
+    const first = D(year, m, 1), days = new Date(Date.UTC(year, m, 0)).getUTCDate();
+    const pad = (new Date(first).getUTCDay() + 6) % 7;
+    let cells = DOW.map(l => `<span class="dow">${l}</span>`).join('') + '<span></span>'.repeat(pad);
+    for (let d = 1; d <= days; d++) {
+      const t = D(year, m, d), i = Math.round((t - res.start) / DAY);
+      const cls = [res.holSet.has(i) ? 'h' : leave.has(t) ? 'c' : !res.work[i] ? 'we' : '', inBreak.has(t) ? 'r' : '', t === today ? 'today' : ''].join(' ').trim();
+      cells += `<span class="${cls}">${d}</span>`;
+    }
+    html += `<div class="month"><h3>${fmtMonth.format(first)}</h3><div class="grid">${cells}</div></div>`;
+  }
+  $('months').innerHTML = html;
+}
+
+function renderTable(year, hol, workdays){
+  let weekend = 0, weekday = 0;
+  $('hol').innerHTML = hol.map(h => {
+    const dow = (new Date(h.t).getUTCDay() + 6) % 7;
+    const off = !workdays.has(dow);
+    let badge;
+    if (h.worked) badge = '<span class="badge b-ok">travaillé (solidarité)</span>';
+    else if (off) { weekend++; badge = '<span class="badge b-we">😭 tombe un jour de repos</span>'; }
+    else {
+      weekday++;
+      const prevOff = !workdays.has((dow + 6) % 7), nextOff = !workdays.has((dow + 1) % 7);
+      const pont = (!workdays.has((dow + 5) % 7) && workdays.has((dow + 6) % 7)) || (!workdays.has((dow + 2) % 7) && workdays.has((dow + 1) % 7));
+      badge = pont ? '<span class="badge b-pont">🌉 pont possible</span>' : (prevOff || nextOff) ? '<span class="badge b-ok">week-end prolongé</span>' : '<span class="badge b-ok">en semaine</span>';
+    }
+    const txt = fmtLong.format(h.t);
+    return `<tr><td class="d">${txt.charAt(0).toUpperCase() + txt.slice(1)}</td><td>${h.name}</td><td>${badge}</td></tr>`;
+  }).join('');
+  const total = hol.filter(h => !h.worked).length;
+  $('verdict').innerHTML = `<strong>${weekday} jour${weekday > 1 ? 's' : ''} férié${weekday > 1 ? 's' : ''} sur ${total}</strong> tombent un jour travaillé en ${year}. ` +
+    (weekend >= 3 ? `😤 ${weekend} tombent un jour de repos : année radine, place bien tes congés !`
+      : weekend === 0 ? '🎉 Aucun ne tombe un jour de repos : année en or !'
+      : `🙂 ${weekend} tombe${weekend > 1 ? 'nt' : ''} un jour de repos : année correcte.`);
+}
+
+/* ---------- Carte de partage ---------- */
+let cardTimer = null, cardCanvas = null;
+function scheduleCard(){ clearTimeout(cardTimer); cardTimer = setTimeout(drawCard, 250); }
+async function drawCard(){
+  await document.fonts.ready;
+  const {res, total} = last, y = state.year;
+  const W = 1080, H = 1080, c = document.createElement('canvas'); c.width = W; c.height = H;
+  const g = c.getContext('2d');
+  const bg = g.createLinearGradient(0, 0, W, H); bg.addColorStop(0, '#0f8b8d'); bg.addColorStop(1, '#0b5f78');
+  g.fillStyle = bg; g.fillRect(0, 0, W, H);
+  // soleil
+  g.fillStyle = '#ffb000'; g.beginPath(); g.arc(W - 150, 150, 80, 0, Math.PI * 2); g.fill();
+  g.fillStyle = 'rgba(255,255,255,.85)'; g.font = '800 34px "DM Sans"'; g.fillText(`MES PONTS ${y}`, 80, 130);
+  g.fillStyle = '#fff'; g.font = '400 300px "DM Serif Display"'; g.fillText(total, 70, 420);
+  const w = g.measureText(String(total)).width;
+  g.font = '400 64px "DM Serif Display"'; g.fillText('jours', 90 + w, 330); g.fillText('de repos', 90 + w, 400);
+  g.fillStyle = '#ffe08a'; g.font = '800 44px "DM Sans"';
+  g.fillText(`pour seulement ${res.used} jour${res.used > 1 ? 's' : ''} de congé posé${res.used > 1 ? 's' : ''}`, 80, 500);
+  // frise des coupures
+  const top = res.breaks.slice().sort((a, b) => b.len / b.cost - a.len / a.cost).slice(0, 5).sort((a, b) => a.from - b.from);
+  top.forEach((b, k) => {
+    const yy = 590 + k * 74;
+    g.fillStyle = 'rgba(255,255,255,.14)'; g.beginPath(); g.roundRect(80, yy - 46, W - 160, 62, 16); g.fill();
+    g.fillStyle = '#fff'; g.font = '700 32px "DM Sans"'; g.fillText(`${short(b.from)} → ${short(b.to)}`, 104, yy - 4);
+    g.textAlign = 'right'; g.fillStyle = '#ffe08a'; g.fillText(`${b.len} j pour ${b.cost}`, W - 104, yy - 4); g.textAlign = 'left';
+  });
+  g.fillStyle = '#fff'; g.font = '800 36px "DM Sans"'; g.textAlign = 'center';
+  g.fillText('Et toi, combien tu en as ? 👉', W / 2, 990);
+  g.fillStyle = 'rgba(255,255,255,.85)'; g.font = '600 30px "DM Sans"'; g.fillText(SITE, W / 2, 1036);
+  cardCanvas = c;
+  $('card').src = c.toDataURL('image/png');
+  const url = writeUrl(), txt = shareText();
+  $('sWa').href = 'https://wa.me/?text=' + encodeURIComponent(txt + ' ' + url);
+  $('sFb').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
+}
+const shareText = () => `🏖️ En ${state.year}, en posant ${last.res.used} jours de congés au bon moment, j'ai ${last.total} jours de repos ! Calcule les tiens :`;
+
+function toast(msg){ const t = $('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('on'), 2200); }
+$('shareBtn').onclick = async () => {
+  const url = writeUrl(), txt = shareText();
+  try {
+    const blob = cardCanvas && await new Promise(r => cardCanvas.toBlob(r, 'image/png'));
+    const file = blob && new File([blob], `ponts-${state.year}.png`, {type: 'image/png'});
+    if (file && navigator.canShare?.({files: [file]})) await navigator.share({files: [file], text: txt + ' ' + url});
+    else if (navigator.share) await navigator.share({title: `Ponts ${state.year}`, text: txt, url});
+    else { await navigator.clipboard.writeText(txt + ' ' + url); toast('Lien copié 📋'); }
+  } catch (_) {}
+};
+$('sDl').onclick = () => { const a = document.createElement('a'); a.href = $('card').src; a.download = `ponts-${state.year}.png`; a.click(); };
+$('copy').onclick = async () => { try { await navigator.clipboard.writeText(writeUrl()); toast('Lien copié 📋'); } catch (_) { toast('Copie impossible'); } };
+
+/* ---------- Export agenda (.ics) ---------- */
+$('ics').onclick = () => {
+  const ymd = t => new Date(t).toISOString().slice(0, 10).replace(/-/g, '');
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+  const ev = (from, to, title, desc, uid) => [
+    'BEGIN:VEVENT', `UID:${uid}@ponts-jours-feries`, `DTSTAMP:${stamp}`,
+    `DTSTART;VALUE=DATE:${ymd(from)}`, `DTEND;VALUE=DATE:${ymd(to + DAY)}`,
+    `SUMMARY:${title}`, `DESCRIPTION:${desc}`, 'TRANSP:TRANSPARENT', 'END:VEVENT'].join('\r\n');
+  const events = [
+    ...last.hol.filter(h => !h.worked).map(h => ev(h.t, h.t, `🎉 ${h.name} (férié)`, 'Jour férié', 'h' + ymd(h.t))),
+    ...last.res.breaks.map(b => ev(b.from, b.to, `🏖️ Vacances (${b.len} jours)`,
+      `Congés à poser : ${b.leave.map(short).join(', ')}`, 'b' + ymd(b.from))),
+  ];
+  const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//ponts-jours-feries//FR', 'CALSCALE:GREGORIAN', ...events, 'END:VCALENDAR'].join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([ics], {type: 'text/calendar'}));
+  a.download = `ponts-${state.year}.ics`; a.click();
+  toast('Fichier agenda téléchargé 📅');
+};
+
+render();
+</script>
+</body>
+</html>
